@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // App shell components
 import AppHeader from '../components/AppHeader/AppHeader';
-//import AppFooter from '../components/AppFooter/AppFooter';
+import AppFooter from '../components/AppFooter/AppFooter';
 
 // React Router page components
 import Home from '../pages/Home/Home';
@@ -29,7 +29,7 @@ export default function App() {
           <Route path="/details/:id" component={Details} />
         </Switch>
       </Router>
-      {/* <AppFooter /> */}
+      <AppFooter />
     </div>
   );
 }

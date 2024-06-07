@@ -4,8 +4,13 @@
 }
 
 .navbar-logo {
-    width: 1.5em;
+    width: 1.8em;
     height: auto;
+}
+
+.nav-link {
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .navbar ul {
@@ -22,6 +27,7 @@
 .navbar a {
     text-decoration: none;
     color: #eee;
+    ;
 }
 
 .navbar a:hover {
