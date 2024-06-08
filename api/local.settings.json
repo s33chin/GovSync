@@ -1,7 +1,6 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=govsync;AccountKey=NtnYZnbKQ8sw8vnwUEq3dkoNzvqxak7EbWWL3FbHRSbtQx0wbApExPg9DuLERQYx0LmvUqJubFqc+AStjqLEJA==;EndpointSuffix=core.windows.net",
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "SearchServiceName": "govsearch",
     "SearchIndexName": "azureblob-index",
