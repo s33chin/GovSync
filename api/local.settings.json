@@ -6,6 +6,6 @@
         "SearchApiKey": "9kPbP52tyc6HFhS7ZJb8xmmkMjB5iK1dYKjY4bpSuUAzSeD3aLJ9",
         "SearchServiceName": "govsearch",
         "SearchIndexName": "azureblob-index",
-        "SearchFacets": "people*,organizations*,locations*",
+        "SearchFacets": "people*,organizations*,locations*"
     }
 }
