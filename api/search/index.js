@@ -1,16 +1,15 @@
-const {
-    SearchClient,
-    SearchIndexClient,
-    SearchIndexerClient,
-    AzureKeyCredential,
-} = require("@azure/search-documents");
+const { SearchClient, AzureKeyCredential } = require("@azure/search-documents");
 
 const indexName = process.env["SearchIndexName"];
 const apiKey = process.env["SearchApiKey"];
 const searchServiceName = process.env["SearchServiceName"];
 
-// To query and manipulate documents
-const SearchClient = new SearchClient('https://govsearch.search.windows.net','azureblob-index', '9kPbP52tyc6HFhS7ZJb8xmmkMjB5iK1dYKjY4bpSuUAzSeD3aLJ9');
+// Create a SearchClient to send queries
+const client = new SearchClient(
+    `https://` + searchServiceName + `.search.windows.net/`,
+    indexName,
+    new AzureKeyCredential(apiKey)
+);
 
 // creates filters in odata syntax
 const createFilterExpression = (filterList, facets) => {
@@ -50,9 +49,7 @@ const readFacets = (facetString) => {
 }
 
 module.exports = async function (context, req) {
-
     //context.log(req);
-
     try {
         // Reading inputs from HTTP Request
         let q = (req.query.q || (req.body && req.body.q));
