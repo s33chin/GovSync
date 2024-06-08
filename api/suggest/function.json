@@ -1,20 +1,18 @@
 {
-    "bindings": [
-        {
-            "authLevel": "anonymous",
-            "type": "httpTrigger",
-            "direction": "in",
-            "name": "req",
-            "methods": [
-                "get",
-                "post"
-            ],
-            "route": "suggest"
-        },
-        {
-            "type": "http",
-            "direction": "out",
-            "name": "res"
-        }
-    ]
-}
+    {
+        "generatedBy": "ezfunc",
+        "bindings": [
+            {
+                "type": "httpTrigger",
+                "authLevel": "anonymous",
+                "direction": "in",
+                "name": "req",
+                "route": "suggest"
+            },
+            {
+                "type": "http",
+                "direction": "out",
+                "name": "res"
+            }
+        ]
+    }
