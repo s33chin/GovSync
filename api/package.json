@@ -6,8 +6,6 @@
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
-  "dependencies": {
-    "@azure/search-documents": "^11.0.3"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }

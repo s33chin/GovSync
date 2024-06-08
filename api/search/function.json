@@ -1,12 +1,14 @@
 {
-    "generatedBy": "ezfunc",
     "bindings": [
         {
-            "type": "httpTrigger",
             "authLevel": "anonymous",
+            "type": "httpTrigger",
             "direction": "in",
             "name": "req",
-            "route": "search"
+            "methods": [
+                "get",
+                "post"
+            ]
         },
         {
             "type": "http",
