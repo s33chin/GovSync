@@ -1,7 +1,7 @@
 const { SearchClient, AzureKeyCredential } = require("@azure/search-documents");
 
 const indexName = process.env["SearchIndexName"];
-const apiKey = process.env["SearchApiKey"];
+const apiKey = process.env["SearchAPIKey"];
 const searchServiceName = process.env["SearchServiceName"];
 
 // Create a SearchClient to send queries
