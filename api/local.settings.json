@@ -5,7 +5,7 @@
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "SearchServiceName": "govsearch",
     "SearchIndexName": "azureblob-index",
-    "SearchAPIKey": "uzOF4iu2C9YNiNqRj1ZALoaIkcLtuNpiVUxvOBeVR7AzSeBlELvl",
+    "SearchAPIKey": "2vP9OtDxHTSNbNdIqPLUCpni44ZBE05hYT9Nd3EvsAAzSeDhJpCX",
     "SearchFacets": "people*,organizations*,locations*"
   }
 }
