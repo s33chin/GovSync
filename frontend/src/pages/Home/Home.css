@@ -14,14 +14,18 @@
 .poweredby {
     text-align: center;
 }
-.image {
-    width: 100%;
-    height: auto;
-    display: block;
+
+.h2 {
+    font-size: 2em;
+    text-align: center;
     margin-bottom: 1em;
 }
 
-.name {
-    text-align: center;
-    font-weight: bold;
+.img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+    margin-left: auto;
+    margin-right: auto;
 }
