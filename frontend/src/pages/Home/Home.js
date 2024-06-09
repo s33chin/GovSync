@@ -16,14 +16,24 @@ export default function Home() {
     return (
         <main className="main main--home">
             <div className="row home-search">
-                <img className="logo" src="/images/cognitive-search.png" alt="Cognitive Search"></img>
+                <a href="/search?q=*">
+                    <img className="logo" src="/images/cognitive-search.png" alt="Cognitive Search"></img>
+                </a>
                 <p className="poweredby lead">Powered by Azure Cognitive Search</p>
                 <SearchBar postSearchHandler={navigateToSearchPage}></SearchBar>
-                <h2>Available Goverment Datasets</h2>
                 <div className="image-container">
-                    <img src="/images/justice.png" alt="Image 1" />
-                    <img src="/images/Housing_and_Urban.png" alt="Image 2" />
-                    <img src="/images/education.png" alt="Image 3" />
+                    <a href="https://www.justice.gov/" target="_blank">
+                        <img src="/images/justice-small.png" alt="DOJ" />
+                    </a>
+                    <a href="https://www.hud.gov/" target="_blank">
+                        <img src="/images/housing-medium.png" alt="DOH" />
+                    </a>
+                    <a href="https://www.ed.gov/" target="_blank">
+                        <img src="/images/edu-medium.png" alt="DOE" />
+                    </a>
+                    <a href="https://www.nyc.gov/site/nypd/index.page" target="_blank">
+                        <img src="/images/police-small.png" alt="NYPD" />
+                    </a>
                 </div>
             </div>
         </main>
