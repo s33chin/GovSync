@@ -100,21 +100,21 @@ export default function Chat() {
         }
     };
 
-    useEffect(() => {
-        const cancelBtn = cancelQueryRef.current;
-        const submitBtn = submitQueryRef.current;
+    // useEffect(() => {
+    //     const cancelBtn = cancelQueryRef.current;
+    //     const submitBtn = submitQueryRef.current;
         
-        cancelBtn.addEventListener("click", handleCancel);
-        submitBtn.addEventListener("click", handleSubmit);
+    //     cancelBtn.addEventListener("click", handleCancel);
+    //     submitBtn.addEventListener("click", handleSubmit);
 
-        return () => {
-            cancelBtn.removeEventListener("click", handleCancel);
-            submitBtn.removeEventListener("click", handleSubmit);
-            if (autoAbortTimeout.current) {
-                clearTimeout(autoAbortTimeout.current);
-            }
-        };
-    }, []);
+    //     return () => {
+    //         cancelBtn.removeEventListener("click", handleCancel);
+    //         submitBtn.removeEventListener("click", handleSubmit);
+    //         if (autoAbortTimeout.current) {
+    //             clearTimeout(autoAbortTimeout.current);
+    //         }
+    //     };
+    // }, []);
 
     return (
         <main>
