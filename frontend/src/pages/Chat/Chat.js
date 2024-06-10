@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './Chat.css';
 
-const API_URL = process.env["API_Endpoint"];
+const API_URL = process.env.REACT_APP_API_ENDPOINT;
 
 export default function Chat() {
     const aborter = useRef(new AbortController());
@@ -56,8 +56,12 @@ export default function Chat() {
             const response = await fetch(API_URL, {
                 body,
                 method: "POST",
-                signal: aborter.current.signal
+                signal: aborter.current.signal,
+                headers: { 'Content-Type': 'application/json' } // Ensure proper content type
             });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const reader = response.body.getReader();
             processReadableStream(reader);
         } catch (error) {
@@ -104,7 +108,7 @@ export default function Chat() {
     useEffect(() => {
         const cancelBtn = cancelQueryRef.current;
         const submitBtn = submitQueryRef.current;
-        
+
         cancelBtn.addEventListener("click", handleCancel);
         submitBtn.addEventListener("click", handleSubmit);
 
@@ -130,7 +134,7 @@ export default function Chat() {
                     ></textarea>
                     <span className="input__label">User message</span>
                 </label>
-                <button ref={submitQueryRef}>Run</button>
+                <button ref={submitQueryRef} disabled={!API_URL}>Run</button>
                 <button ref={cancelQueryRef} className="hidden">Cancel</button>
             </section>
             <p className="text__hint">
