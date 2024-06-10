@@ -16,7 +16,7 @@ module.exports = async function (context, req) {
     //context.log(req);
 
     // Reading inputs from HTTP Request
-    const id = (req.query.id || (req.body && req.body.id));
+    const id = (req.query.metadata_storage_name || (req.body && req.body.metadata_storage_name));
     
     // Returning the document with the matching id
     const document = await client.getDocument(id)

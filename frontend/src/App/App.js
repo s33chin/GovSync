@@ -10,6 +10,7 @@ import AppFooter from '../components/AppFooter/AppFooter';
 import Home from '../pages/Home/Home';
 import Search from '../pages/Search/Search';
 import Details from '../pages/Details/Details';
+import Chat from '../pages/Chat/Chat';
 
 // Bootstrap styles, optionally with jQuery and Popper
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,7 +26,8 @@ export default function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/search" component={Search} />
-          <Route path="/details/:id" component={Details} />
+          <Route path="/chat" component={Chat}/>
+          <Route path="/details/:id" component={Details}/>
         </Switch>
       </Router>
       <AppFooter />

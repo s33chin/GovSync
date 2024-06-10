@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import Rating from '@material-ui/lab/Rating';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 
@@ -40,7 +39,7 @@ export default function Details() {
             resultStyle += " active";     
             detailsBody = (
                 <div className="card-body">
-                    <h5 className="card-title">{document.content}</h5>
+                    <h5 className="card-title">{document.metadata_storage_name}</h5>
                     <p className="card-text">{document.people}</p>
                     <p className="card-text">{document.location}</p>
                     <p className="card-text">{document.organization}</p>
