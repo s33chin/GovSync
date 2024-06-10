@@ -50,7 +50,7 @@ export default function Chat() {
     };
 
     const submitQuery = async (body) => {
-        const { API_URL = 'http://localhost:3000' } = import.meta.env;
+        const { API_URL = 'https://witty-field-015c08f0f.5.azurestaticapps.net' } = import.meta.env;
         try {
             const response = await fetch(`${API_URL}/api/assistant`, {
                 body,
