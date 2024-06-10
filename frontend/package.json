@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "A platform used by goveernment agencies for sharing datasets.",
   "dependencies": {
     "@azure/abort-controller": "^2.1.2",
     "@azure/identity": "^4.2.0",
