@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import './Chat.css';
 
+const API_URL = process.env["API_Endpoint"];
+
 export default function Chat() {
     const aborter = useRef(new AbortController());
     const autoAbortTimeout = useRef(null);
@@ -50,9 +52,8 @@ export default function Chat() {
     };
 
     const submitQuery = async (body) => {
-        const { API_URL = 'https://witty-field-015c08f0f.5.azurestaticapps.net' } = import.meta.env;
         try {
-            const response = await fetch(`${API_URL}/api/assistant`, {
+            const response = await fetch(API_URL, {
                 body,
                 method: "POST",
                 signal: aborter.current.signal
