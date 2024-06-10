@@ -5,12 +5,12 @@ export default function Chat() {
     const aborter = useRef(new AbortController());
     const autoAbortTimeout = useRef(null);
 
-    const outputRef = document.querySelector("#outputRef");
-    const loadingRef = document.querySelector("#loadingRef");
-    const userQueryRef = document.querySelector("#userQueryRef");
-    const cancelQueryRef = document.querySelector("#cancelQueryRef");
-    const submitQueryRef = document.querySelector("#submitQueryRef");
-    const statusLabelRef = document.querySelector("#statusLabelRef");
+    const outputRef = useRef(null);
+    const loadingRef = useRef(null);
+    const userQueryRef = useRef(null);
+    const cancelQueryRef = useRef(null);
+    const submitQueryRef = useRef(null);
+    const statusLabelRef = useRef(null);
 
     const handleCancel = () => {
         aborter.current.abort();
@@ -100,21 +100,21 @@ export default function Chat() {
         }
     };
 
-    // useEffect(() => {
-    //     const cancelBtn = cancelQueryRef.current;
-    //     const submitBtn = submitQueryRef.current;
+    useEffect(() => {
+        const cancelBtn = cancelQueryRef.current;
+        const submitBtn = submitQueryRef.current;
         
-    //     cancelBtn.addEventListener("click", handleCancel);
-    //     submitBtn.addEventListener("click", handleSubmit);
+        cancelBtn.addEventListener("click", handleCancel);
+        submitBtn.addEventListener("click", handleSubmit);
 
-    //     return () => {
-    //         cancelBtn.removeEventListener("click", handleCancel);
-    //         submitBtn.removeEventListener("click", handleSubmit);
-    //         if (autoAbortTimeout.current) {
-    //             clearTimeout(autoAbortTimeout.current);
-    //         }
-    //     };
-    // }, []);
+        return () => {
+            cancelBtn.removeEventListener("click", handleCancel);
+            submitBtn.removeEventListener("click", handleSubmit);
+            if (autoAbortTimeout.current) {
+                clearTimeout(autoAbortTimeout.current);
+            }
+        };
+    }, []);
 
     return (
         <main>
