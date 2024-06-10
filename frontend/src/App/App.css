@@ -1,13 +1,71 @@
+
 /* Application styles */
-.app {
-    background-color: #ffffff;
-    padding: 0;
-    min-width: 375px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
 }
 
-.main--home {
-    min-height: 40em;
+.app {
+    background-color: #ffffff;
 }
-.main--details {
-    min-height: 40em;
+
+/* Header Styles */
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+nav a:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Main Content Area */
+main {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Home Page */
+.home {
+    text-align: center;
+}
+
+.home h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.home p {
+    font-size: 20px;
+    color: #666;
 }
