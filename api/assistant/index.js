@@ -1,56 +1,33 @@
-
 const { Readable } = require("node:stream");
 const { app } = require("@azure/functions");
 
-const { AzureOpenAI } = require("openai");
+const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
 const { DefaultAzureCredential, getBearerTokenProvider } = require("@azure/identity");
 
 const mailer = require("./mailer");
 
-
-const ASSISTANT_ID = process.env["AssistantId"];
-const AZURE_DEPLOYMENT_NAME = process.env["DeploymentName"];
+const endpoint = process.env["AZURE_OPENAI_ENDPOINT"];
+const azureApiKey = process.env["AZURE_OPENAI_API_KEY"];
+const deploymentId = process.env["AZURE_OPENAI_DEPLOYMENT_ID"];
+const searchEndpoint = process.env["AZURE_AI_SEARCH_ENDPOINT"];
+const searchKey = process.env["AZURE_AI_SEARCH_API_KEY"];
+const searchIndex = process.env["AZURE_AI_SEARCH_INDEX"];
 const EMAIL_RECEIVER = process.env["EmailReceiver"];
 const OPENAI_FUNCTION_CALLING_SKIP_SEND_EMAIL = process.env["OpenAIFunctionCallingSkipSendEmail"];
-
 
 // Important: Errors handlings are removed intentionally. If you are using this sample in production
 // please add proper error handling.
 
-async function initAzureOpenAI(context) {
-    console.log("Using Azure OpenAI (w/ Microsoft Entra ID) ...");
-    const credential = new DefaultAzureCredential();
-    const azureADTokenProvider = getBearerTokenProvider(credential, "https://cognitiveservices.azure.com/.default");
-    return new AzureOpenAI({
-        azureADTokenProvider,
-    });
-}
+// Create a OpenAIClient to send queries
+const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
 
 const assistantDefinition = {
     name: "GovSync Assistant",
     instructions:
-        "You are a helpful assistant that . "
+        "You are a helpful assistant that helps researchers gains insight from datasets available to you. "
         + "You also know how to generate a full body email formatted as rich html. Do not use other format than rich html."
         + "Only use the functions you have been provideded with",
     tools: [
-        {
-            type: "function",
-            function: {
-                name: "getStockPrice",
-                description:
-                    "Retrieve the latest closing price of a stock using its ticker symbol.",
-                parameters: {
-                    type: "object",
-                    properties: {
-                        symbol: {
-                            type: "string",
-                            description: "The ticker symbol of the stock",
-                        },
-                    },
-                    required: ["symbol"],
-                },
-            },
-        },
         {
             type: "function",
             function: {
@@ -72,19 +49,40 @@ const assistantDefinition = {
                     required: ["subject", "html"],
                 },
             },
+        },
+        {
+            type: "function",
+            function: {
+                name: "searchAzureIndex",
+                description:
+                    "Searches Azure Cognitive Search index and returns results.",
+                parameters: {
+                    type: "object",
+                    properties: {
+                        query: {
+                            type: "string",
+                            description: "The search query",
+                        },
+                    },
+                    required: ["query"],
+                },
+            },
         }
     ],
-    model: AZURE_DEPLOYMENT_NAME,
+    model: deploymentId,
 };
 
 async function* processQuery(userQuery) {
     console.log('Step 0: Connect and acquire an OpenAI instance');
-    const openai = await initAzureOpenAI();
+    const openai = await client.getOpenAI();
 
     console.log('Step 1: Retrieve or Create an Assistant');
-    const assistant = ASSISTANT_ID
-        ? await openai.beta.assistants.retrieve(ASSISTANT_ID)
-        : await openai.beta.assistants.create(assistantDefinition);
+    let assistant;
+    if (deploymentId) {
+        assistant = await openai.beta.assistants.retrieve(deploymentId);
+    } else {
+        assistant = await openai.beta.assistants.create(assistantDefinition);
+    }
 
     console.log('Step 2: Create a Thread');
     const thread = await openai.beta.threads.create();
@@ -148,14 +146,7 @@ async function* handleRequiresAction(openai, run, runId, threadId) {
         const toolOutputs = await Promise.all(
             run.required_action.submit_tool_outputs.tool_calls.map(
                 async (toolCall) => {
-                    if (toolCall.function.name === "getStockPrice") {
-                        return {
-                            tool_call_id: toolCall.id,
-                            output: await getStockPrice(
-                                JSON.parse(toolCall.function.arguments).symbol
-                            ),
-                        };
-                    } else if (toolCall.function.name === "writeAndSendEmail") {
+                    if (toolCall.function.name === "writeAndSendEmail") {
                         const args = JSON.parse(toolCall.function.arguments);
                         return {
                             tool_call_id: toolCall.id,
@@ -163,6 +154,13 @@ async function* handleRequiresAction(openai, run, runId, threadId) {
                                 args.subject,
                                 args.html
                             ),
+                        };
+                    }
+                    else if (toolCall.function.name === "searchAzureIndex") {
+                        const args = JSON.parse(toolCall.function.arguments);
+                        return {
+                            tool_call_id: toolCall.id,
+                            output: await searchAzureIndex(args.query),
                         };
                     }
                     return toolCall;
@@ -206,15 +204,17 @@ async function* submitToolOutputs(openai, toolOutputs, runId, threadId) {
     }
 }
 
-// Functions Callings
-
-async function getStockPrice(symbol) {
-    return Promise.resolve("" + Math.random(10) * 1000); // simulate network request
+async function searchAzureIndex(query) {
+    const { SearchClient, AzureKeyCredential } = require("@azure/search-documents");
+    const searchClient = new SearchClient(searchEndpoint, searchIndex, new AzureKeyCredential(searchKey));
+    
+    const searchResults = await searchClient.search(query);
+    return searchResults.results.map(result => result.document);
 }
 
 async function writeAndSendEmail(subject, html) {
     if (OPENAI_FUNCTION_CALLING_SKIP_SEND_EMAIL === 'true') {
-        console.log('Dry mode emabled. Skip sending emails');
+        console.log('Dry mode enabled. Skip sending emails');
         return 'Fake email sent!!';
     }
 

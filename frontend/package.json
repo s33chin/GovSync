@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@azure/abort-controller": "^2.1.2",
+    "@azure/identity": "^4.2.0",
     "@azure/openai": "^1.0.0-beta.12",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -15,6 +16,7 @@
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "lit": "^3.1.4",
+    "nodemailer": "^6.9.13",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

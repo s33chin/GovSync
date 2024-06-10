@@ -7,9 +7,8 @@
     "SearchIndexName": "azureblob-index",
     "SearchAPIKey": "2vP9OtDxHTSNbNdIqPLUCpni44ZBE05hYT9Nd3EvsAAzSeDhJpCX",
     "SearchFacets": "people*,organizations*,locations*",
-    "AssistantId": "placeholder",
-    "DeploymentName":"placeholder",
-    "EmailReceiver": "placeholder",
-    "OpenAIFunctionCallingSkipSendEmail": "placeholder"
+    "DeploymentName":"gpt-4o",
+    "EmailReceiver": "shane.chin97@gmail.com",
+    "OpenAIFunctionCallingSkipSendEmail": ""
   }
 }
