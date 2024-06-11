@@ -1,0 +1,45 @@
+{
+    "routes": [
+        {
+            "route": "/home",
+            "serve": "/",
+            "statusCode": 301
+        },
+        {
+            "route": "/search"
+        },
+        {
+            "route": "/api/search"
+        },
+        {
+            "route": "/api/lookup"
+        },
+        {
+            "route": "/api/suggest"
+        },
+        {
+            "route": "/details/*"
+        },
+        {
+            "route": "/api/assistant/"
+        },
+        {
+            "route": "/api/mailer/"
+        },
+        {
+            "route": "/chat"
+        },
+        {
+            "route": "/*",
+            "serve": "/",
+            "statusCode": 200
+        }
+    ],
+    "platformErrorOverrides": [
+        {
+            "errorType": "NotFound",
+            "serve": "/index.html",
+            "statusCode": 200
+        }
+    ]
+}

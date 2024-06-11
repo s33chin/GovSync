@@ -1,7 +1,7 @@
 const { SearchClient, AzureKeyCredential } = require("@azure/search-documents");
 
 const indexName = process.env["SearchIndexName"];
-const apiKey = process.env["SearchApiKey"];
+const apiKey = process.env["SearchAPIKey"];
 const searchServiceName = process.env["SearchServiceName"];
 
 // Create a SearchClient to send queries
@@ -16,7 +16,7 @@ const createFilterExpression = (filterList, facets) => {
     let i = 0;
     let filterExpressions = [];
 
-    while (i < filterList.length) {        
+    while (i < filterList.length) {
         let field = filterList[i].field;
         let value = filterList[i].value;
 
@@ -49,9 +49,7 @@ const readFacets = (facetString) => {
 }
 
 module.exports = async function (context, req) {
-
     //context.log(req);
-
     try {
         // Reading inputs from HTTP Request
         let q = (req.query.q || (req.body && req.body.q));
@@ -59,7 +57,7 @@ module.exports = async function (context, req) {
         const skip = (req.query.skip || (req.body && req.body.skip));
         const filters = (req.query.filters || (req.body && req.body.filters));
         const facets = readFacets(process.env["SearchFacets"]);
-        
+
 
         // If search term is empty, search everything
         if (!q || q === "") {
