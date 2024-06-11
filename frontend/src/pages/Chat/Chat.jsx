@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import './Chat.css';
+import ChatUI from '../../components/ChatUI/ChatUI';
+
 
 const API_URL = process.env.REACT_APP_API_ENDPOINT;
 
@@ -122,34 +123,15 @@ export default function Chat() {
     }, []);
 
     return (
-        <main>
-            <section className="input__container">
-                <label className="input">
-                    <textarea
-                        ref={userQueryRef}
-                        className="input__field"
-                        placeholder="Hi there..."
-                        cols="10"
-                        rows="10"
-                    ></textarea>
-                    <span className="input__label">User message</span>
-                </label>
-                <button ref={submitQueryRef} disabled={!API_URL}>Run</button>
-                <button ref={cancelQueryRef} className="hidden">Cancel</button>
-            </section>
-            <p className="text__hint">
-                Your Assistant can make mistakes. Consider checking important
-                information.
-            </p>
-            <section className="output__container">
-                <div ref={loadingRef} className="loader__container hidden">
-                    <span className="spinner">
-                        <span className="spinner__tail"></span>
-                    </span>
-                    <p>Working on it (<span ref={statusLabelRef}>waiting</span>)</p>
-                </div>
-                <div ref={outputRef} className="hidden"></div>
-            </section>
-        </main>
+        <ChatUI
+            userQueryRef={userQueryRef}
+            outputRef={outputRef}
+            loadingRef={loadingRef}
+            cancelQueryRef={cancelQueryRef}
+            submitQueryRef={submitQueryRef}
+            statusLabelRef={statusLabelRef}
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel}
+        />
     );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
+
 
 
 // App shell components
@@ -27,8 +27,8 @@ export default function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/search" component={Search} />
-          <Route path="/chat" component={Chat}/>
           <Route path="/details/:id" component={Details}/>
+          <Route path="/chat" component={Chat}/>
         </Switch>
       </Router>
       <AppFooter />
