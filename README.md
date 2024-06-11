@@ -26,7 +26,7 @@ The GovSync platform is built using a microservices architecture, leveraging var
 
 By utilizing this architecture, GovSync ensures scalability, reliability, and efficient data processing, enabling seamless collaboration and decision-making across government agencies.
 
-![Cloud Architecture](./images/GovSync-Architecture-Cloud.png)
+![Cloud Architecture](./images/GovSync.png)
 
 
 ## Built With
